@@ -17,13 +17,14 @@ pub mod escrow {
         Ok(())
     }
 
-    pub fn take(ctx: Context<Take>, seeds: u64, amount: u64,) -> Result<()> {
-        ctx.accounts.transfer(amount)?;
-        ctx.accounts.close_vault(seeds)?;
+    pub fn take(ctx: Context<Take>) -> Result<()> {
+        ctx.accounts.transfer()?;
+        ctx.accounts.close_vault()?;
         Ok(())
     }
-    pub fn refund(ctx: Context<Refund>, seeds: u64,)-> Result<()>  {
-        ctx.accounts.close_vault(seeds)?;
+    pub fn refund(ctx: Context<Refund>)-> Result<()>  {
+        ctx.accounts.withdraw()?;
+        ctx.accounts.close_vault()?;
         Ok(())
     }
 }
